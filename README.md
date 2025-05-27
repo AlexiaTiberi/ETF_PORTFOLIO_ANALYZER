@@ -1,5 +1,5 @@
 ## ETF Portfolio Analyzer
-If you’re anything like me, you’ve probably explored a variety of ETFs — a bit of S&P 500 here, some STOXX 600 there, maybe ACWI and ACWI ex US too. Now you’re left wondering: what exactly is my portfolio’s exposure in terms of geography, currency, sectors, or asset classes?
+If you’re anything like me, you’ve probably bought a variety of ETFs — a bit of S&P 500 here, some STOXX 600 there, maybe ACWI and ACWI ex US too. Now you’re left wondering: what exactly is my portfolio’s exposure in terms of geography, currency, sectors, or asset classes?
 
 This Python-based tool helps you answer exactly that — so you can keep shopping for ETFs while staying in control of your overall financial exposure.
 
@@ -77,6 +77,8 @@ For Amundi ETFs, **you need two separate files**:
 
 ![NAV Example](info/image-1.png)
 
+
+I will add additional classes when I will need them!
 ---
 
 ### 2. 📄 Fund Holdings (`Titoli detenuti`)
@@ -88,6 +90,8 @@ For Amundi ETFs, **you need two separate files**:
 Place both `.csv` files in the `etf_data` folder.  
 Example ETF page:  
 [Amundi STOXX Europe 600 UCITS ETF](https://www.amundietf.it/it/professionali/products/equity/amundi-stoxx-europe-600-ucits-etf-acc/lu0908500753)
+
+
 
 ---
 
