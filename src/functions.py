@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
+import re
 
 def get_holdings_overlap_percentage(etf1, etf2, key="Ticker"):
     """
@@ -207,3 +208,17 @@ def visualize_weighted_overlap_pie(etf1, etf2, key="Ticker", weight_col="Weight"
     
     plt.tight_layout()
     plt.show()
+
+def parse_amundi_filename(filename):
+    # Remove file extension
+    name = os.path.splitext(os.path.basename(filename))[0]
+
+    # Extract ISIN (usually 12 characters, starts with two letters)
+    isin_match = re.search(r'[A-Z]{2}[A-Z0-9]{10}', name)
+    isin = isin_match.group(0) if isin_match else None
+
+    # Extract name between the prefix and the ISIN
+    fund_match = re.search(r'_(.*?)_(' + isin + ')', name)
+    fund_name = fund_match.group(1).strip() if fund_match else "Unknown Fund"
+
+    return fund_name, isin
