@@ -10,7 +10,7 @@ class IShareETF:
         self._parse_file()
 
     def _parse_file(self):
-        raw_df = pd.read_excel(self.file_path, engine="openpyxl")
+        raw_df = pd.read_excel(self.file_path, engine="openpyxl", sheet_name=0)
         self.metadata["fund_name"] = str(raw_df.iloc[0, 0])
         self.metadata["inception_date"] = str(raw_df.iloc[1, 1])
         self.metadata["num_securities"] = raw_df.iloc[3, 1]

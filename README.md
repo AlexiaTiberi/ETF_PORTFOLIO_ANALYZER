@@ -1,8 +1,51 @@
+## ETF Portfolio Analyzer
+If you’re anything like me, you’ve probably explored a variety of ETFs — a bit of S&P 500 here, some STOXX 600 there, maybe ACWI and ACWI ex US too. Now you’re left wondering: what exactly is my portfolio’s exposure in terms of geography, currency, sectors, or asset classes?
+
+This Python-based tool helps you answer exactly that — so you can keep shopping for ETFs while staying in control of your overall financial exposure.
+
+## 📓 How the Main Notebook Works
+
+The core logic is contained in the main Jupyter Notebook (`main.ipynb`), which guides you through the entire portfolio analysis workflow.
+
+### 🧭 Workflow Overview
+
+1. **Load ETF Files**
+   - The notebook scans the `etf_data/` folder for iShares `.xlsx` and Amundi `.csv` files.
+   - Files are parsed into ETF objects using custom classes (`IShareETF`, `AmundiETF`).
+
+2. **User Input: Quotas**
+   - A small GUI (Tkinter-based) prompts you to enter the number of quotas held for each ETF.
+
+3. **Calculate Portfolio Exposure**
+   - Based on the holdings and quota value, exposures are calculated for:
+     - 🌍 Geographic (`Location`)
+     - 🏦 Sector
+     - 💱 Currency
+     - 🧱 Asset Class
+   - Exposures can be computed globally (portfolio-level) or per ETF.
+
+4. **Visualization**
+   - Exposure distributions are plotted using Matplotlib pie charts.
+
+5. **Export**
+   - Final results are saved as `.csv` files in the `analysis_data/` folder for record-keeping and further analysis.
+
+---
+
+### 📌 Tip:
+You can modify the grouping column (e.g., `'Sector'`, `'Currency'`) using the `compute_portfolio_exposure()` function:
+
+```python
+compute_portfolio_exposure(ETF_list, quotas_dict, group_by='Sector')
+
+```
+---
 ## 📁 Input Files — Store in the `etf_data` Folder
 
 This project parses ETF data (e.g., holdings, historical NAV) from files **manually downloaded from ETF provider websites**.
 
 Please read the instructions below carefully to ensure proper formatting and file placement.
+
 
 ---
 
@@ -18,6 +61,8 @@ iShares provides downloadable Excel files with all the necessary data.
 3. Convert the downloaded `.xls` file to `.xlsx`.
 4. Save the `.xlsx` file in the `etf_data` folder.
 
+In the Italian version of this in the first page you have partecipation and in the third the NAV (history) - if in your country the situation is different (IShare should really standardize their document). You are going to have to change the page that read_excell function imports...
+![alt text](info/image4.png)
 ---
 
 ## 🟠 Amundi ETFs
