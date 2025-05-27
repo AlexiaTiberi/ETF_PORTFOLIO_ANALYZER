@@ -61,7 +61,8 @@ iShares provides downloadable Excel files with all the necessary data.
 3. Convert the downloaded `.xls` file to `.xlsx`.
 4. Save the `.xlsx` file in the `etf_data` folder.
 
-In the Italian version of this in the first page you have partecipation and in the third the NAV (history) - if in your country the situation is different (IShare should really standardize their document). You are going to have to change the page that read_excell function imports...
+In the Italian version of this IShare document, in the first page you have "partecipations/holdings" and in the third the NAV (history) - if in your country the situation is different (IShare should really standardize their document), you are going to have to modify the IShare class and change the page that read_excell function imports in line 13-14 (sheet_name=0 if partecipation is the first sheet and so on), 18-19 (sheet_name=2 cause now it is the third).
+
 ![alt text](info/image4.png)
 ---
 

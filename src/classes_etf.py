@@ -6,17 +6,17 @@ class IShareETF:
         self.file_path = file_path
         self.metadata = {}
         self.holdings = pd.DataFrame()
-        self.storico = pd.DataFrame()
+        self.history = pd.DataFrame()
         self._parse_file()
 
     def _parse_file(self):
-        raw_df = pd.read_excel(self.file_path, engine="openpyxl", sheet_name=0)
+        raw_df = pd.read_excel(self.file_path, engine="openpyxl", sheet_name=0) # this page should be partecipation /holdings
+        df = pd.read_excel(self.file_path, skiprows=7, engine="openpyxl", sheet_name=0) # this page should be partecipation /holdings
         self.metadata["fund_name"] = str(raw_df.iloc[0, 0])
         self.metadata["inception_date"] = str(raw_df.iloc[1, 1])
         self.metadata["num_securities"] = raw_df.iloc[3, 1]
-        self.metadata["curr_value"] = float(pd.read_excel(self.file_path, engine="openpyxl", sheet_name=2).iloc[0, 2])
-        self.storico = pd.read_excel(self.file_path, engine="openpyxl", sheet_name=2)
-        df = pd.read_excel(self.file_path, skiprows=7, engine="openpyxl")
+        self.metadata["curr_value"] = float(pd.read_excel(self.file_path, engine="openpyxl", sheet_name=2).iloc[0, 2]) # this page should be NAV/history
+        self.history = pd.read_excel(self.file_path, engine="openpyxl", sheet_name=2) # this page should be NAV/history
         df = self._clean_holdings_dataframe(df, source="ishare")
         self.holdings = df
 
@@ -71,7 +71,7 @@ class AmundiETF:
         self.nav_path = nav_path
         self.metadata = {}
         self.holdings = pd.DataFrame()
-        self.storico = pd.DataFrame()
+        self.history = pd.DataFrame()
         self._parse_files()
 
     def _parse_files(self):
@@ -79,7 +79,7 @@ class AmundiETF:
         nav_df = pd.read_csv(self.nav_path, skiprows=26, sep=";", encoding="latin1")
         nav_df = nav_df.iloc[:, 1:3].dropna()
         nav_val = nav_df.iloc[0, 1]
-        self.storico = nav_val
+        self.history = nav_val
         self.metadata["curr_value"] = float(nav_val)  
         fund_name, isin = parse_amundi_filename(self.nav_path)
         self.metadata["fund_name"] = fund_name
